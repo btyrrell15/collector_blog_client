@@ -66,7 +66,7 @@ var app = new Vue ({
 
   methods: {
       getPosts: function () {
-        fetch("server_url/posts").then(function(res){
+        fetch(`${this.server_url}/posts`).then(function(res){
             res.json().then(function(data){
                 console.log(data);
                 app.posts = data.posts;
@@ -82,7 +82,7 @@ var app = new Vue ({
               image: this.new_image,
               text: this.new_text,
           };
-          fetch("server_url/posts", {
+          fetch(`${this.server_url}/posts`, {
               method: "POST",
               headers: {
                   "Content-type": "application/json"
