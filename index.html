@@ -35,8 +35,14 @@
                     ></v-overflow-btn>
                   <v-layout row wrap>
                       <v-flex xs4 v-for="post in sorted_posts" text-xs-center>
-                          <v-card>
-                              <v-img v-bind:src="post.image" aspect-ratio="1.7"/></v-img>
+                          <v-card elevation="20">
+                              <v-img
+                              v-bind:src="post.image"
+                              aspect-ratio="1.7" >
+                              <v-btn icon class="right" v-if="show_delete">
+                                  <v-icon color="red" >delete</v-icon>
+                              </v-btn>
+                              </v-img>
                               <div class="title">{{post.title}}</div><div>{{post.author}}</div>
                               <div>{{post.category}}</div>
                               <div>{{post.text}}</div>
