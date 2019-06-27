@@ -54,7 +54,7 @@ var app = new Vue ({
       //         image: "https://i.imgur.com/HuwV4CW.jpg",
       //         text: "a;lksdf."
       //     },
-      server_url: "https://collector-blog-brian.herokuapp.com",
+      server_url: "https://collector-blog-brian.herokuapp.com"
 
   },
 
@@ -66,7 +66,7 @@ var app = new Vue ({
 
   methods: {
       getPosts: function () {
-        fetch("server_url").then(function(res){
+        fetch("server_url/posts").then(function(res){
             res.json().then(function(data){
                 console.log(data);
                 app.posts = data.posts;
@@ -82,7 +82,7 @@ var app = new Vue ({
               image: this.new_image,
               text: this.new_text,
           };
-          fetch("http://localhost:3000/posts", {
+          fetch("server_url/posts", {
               method: "POST",
               headers: {
                   "Content-type": "application/json"
