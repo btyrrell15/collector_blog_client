@@ -39,8 +39,16 @@
                               <v-img
                               v-bind:src="post.image"
                               aspect-ratio="1.7" >
-                              <v-btn icon class="right" v-if="show_delete">
-                                  <v-icon color="red" >delete</v-icon>
+                              <v-btn
+                              icon class="right"
+                              v-if="show_delete"
+                              @click="deletePost(post)">
+                              <v-icon color="red" >delete</v-icon>
+                              </v-btn>
+                              <v-btn
+                              icon class="right"
+                              @click="editPost(post)">
+                              <v-icon color="black" >edit</v-icon>
                               </v-btn>
                               </v-img>
                               <div class="title">{{post.title}}</div><div>{{post.author}}</div>
@@ -102,6 +110,51 @@
                                 <v-btn type="submit" v-on:click="addPost()">Create</v-btn>
                      </v-layout>
               </v-container>
+              <v-container fluid grid-list-lg v-if="page == 'edit'">
+                     <v-layout row wrap>
+                             <v-flex xs3>
+                             </v-flex>
+                                  <v-flex xs6>
+                                      <div>Edit Post</div>
+                                         <v-text-field
+                                            v-model="edit_title"
+                                            solo
+                                            flat
+                                            outline
+                                         ></v-text-field>
+                                       <v-text-field
+                                            v-model="edit_author"
+                                          solo
+                                          flat
+                                          outline
+                                          ></v-text-field>
+                                          <v-select
+                                              :items="categories"
+                                              label ="Select a category"
+                                              v-model="edit_category"
+                                              outline
+                                            ></v-select>
+                                            <v-text-field
+                                                v-model="edit_image"
+                                               solo
+                                               flat
+                                               outline
+                                               ></v-text-field>
+                                              <v-textarea
+                                                v-model="edit_text"
+                                                 label="Message"
+                                                 counter
+                                                 maxlength="120"
+                                                 full-width
+                                                 single-line
+                                                 outline
+                                                 ></v-textarea>
+                                    <v-flex xs3>
+                                    </v-flex>
+                                <v-btn type="submit" v-on:click="updatePost()">Update</v-btn>
+                     </v-layout>
+              </v-container>
+
               <!-- <div>Collector's Blog</div>
               <button v-on:click="page = 'blog'">blog</button>
               <button v-on:click="page = 'post'">post</button> <br>

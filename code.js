@@ -21,6 +21,12 @@ var app = new Vue ({
       new_author: "",
       new_image: "",
       new_text: "",
+      edit_category: "Select a Catgeory",
+      edit_title: "",
+      edit_author: "",
+      edit_image: "",
+      edit_text: "",
+      edit_id: "",
       posts: [],
       //     {
       //         title: "first post",
@@ -140,7 +146,31 @@ var app = new Vue ({
                   })
               }
           })
-      }
+      },
+
+      editPost: function(post) {
+          this.page = "edit";
+          app.edit_title = post.title;
+          app.edit_author = post.author;
+          app.edit_category = post.category;
+          app.edit_image = post.image;
+          app.edit_text = post.text;
+          app.edit_id = post._id;
+    },
+    updatePost: function(){
+        fetch(`${this.server_url}/posts/${app.edit_id}`, {
+            method: "PUT"
+        }).then(function(response){
+            if (response.status == 204){
+                console.log("It worked");
+                app.getPosts();
+            } else if(response.status == 400){
+                response.json().then(function(data){
+                    alert(data.msg);
+                })
+            }
+        })
+    },
       // formatDate:
   },
 
